@@ -1,0 +1,19 @@
+
+{% extends "frontend/base.html.twig" %}
+{% block title %}Evenement{% endblock %}
+{% block body %}
+{{ include('frontend/navbar.html.twig') }} 
+
+<br>
+<div class="container text-center "  id ="evenement"> 
+        <em >le: {{event.event_date|date('d/m/Y')}}</em>
+    <div class="row" id ="titre_event">      
+        <h2 class="text-center mb-10" id = "titre">{{event.title}}</h2>
+    </div>
+    <div class="row" id="descrip">
+        <p class=" text-center" id ="cont" >{{event.states|raw}}</p>       
+    </div>      
+</div>
+<br>
+
+{% endblock %}

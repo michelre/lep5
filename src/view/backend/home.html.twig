@@ -1,0 +1,190 @@
+
+
+{% extends "frontend/base.html.twig" %}
+{% block title %}Administration{% endblock %}
+{% block body %}
+  {{ include('backend/backnavbar.html.twig') }} 
+  <br>
+  <div class="container text-center" id ="gestion">
+        <h1>Bienvenue sur la  page de gestion de vos publications:</h1><br> 
+      <p>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1">Gestion des commentaires</button>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Gestion des articles</button>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">Gestion des évènements</button>
+      </p>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+              <div class="card card-body">
+                  <h3 class="mb-0">
+                      Ici , vous pouvez  : Gérer les commentaires concernant vos articles. </h3><br>                          
+                      <section class ="tab1">
+                          <div class="container text-center">
+                              <h1>Page de gestions des commentaires :</h1><br>       
+                          </div> 
+                            <div class="container text-center">
+                               <h2>Tableau des commentaires  par articles</h2>  
+                                 {% for result in result %} 
+                                <table class="table table-bordered">
+                                  <thead class="thead-light">   
+                                    <tr>
+                                        <th>Titre de  l'article:</th>                        
+                                          <td class ="col-lg-6">{{result.a_title}}</td>         
+                                    </tr>
+                                    <tr>  
+                                        <th>commentaire</th>
+                                        <td>
+                                           datant du :{{result.comment_date|date('d/m/Y')}} :{{result.comment}}         
+                                       </td>
+                                       <tr>
+                                        <th>Actions</th>
+                                        <td>                
+                                            <a href="/driveComment/{{result.c_id}}"><button type="button" class="btn btn-danger">Supprimer le commentaire</button></a>
+                                       </td>
+                                      </tr>
+                                    </tr>
+                                  </thead>
+                                  <tbody>                  
+                                  {% endfor %}
+                                  </tbody>
+                                </table>
+                                <div class=" container">
+                                  <div class="row">        
+                                   {% if result == false %}
+                                     <div class ="col-lg-12"id = "bulle" >
+                                       <h1>Il n'y a plus de commentaires !</h1>
+                                   {% endif %}
+                                     </div>
+                                   </div>
+                                </div>
+                              </div>
+                  </section>
+              </div>
+            </div>
+          </div>
+        </div> 
+        <div class="row">  
+          <div class="col-lg-12">
+            <div class="collapse multi-collapse" id="multiCollapseExample2">
+              <div class="card card-body">
+                <h3 class="mb-0"> 
+                   Ici , vous pouvez :  Modifier où supprimer un article  et insérer un nouvel article.</h3><br> 
+                  
+                 <div class="container text-center">
+           
+                    <h2>Tableau des Articles</h2> 
+                    <table class="table table-bordered">
+                      <thead class="thead-light">
+                        <tr>  
+                          <th>Titre Article</th>       
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for article in articles %}  
+                        <tr>   
+                          <td>{{article.title}}<br>{{article.creation_date}}</td>
+                          <td><a href ="/modifyArticle/{{article.id}}" class="btn btn-secondary" role ="button"><input type="hidden" name="id" value="" />Modifier l'Article</a>        
+                        </td> 
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                    <section>
+                        <div class="container text-center">        
+                            <h2>écrire un nouvel article </h2>         
+                            <p>A vous de jouer !</p>
+                        </div>
+                      
+                          <div class = container  id="post">        
+                            <form action="/addArticle" method="post" enctype="multipart/form-data">
+                              <div class="form-group">
+                            
+                              <label for="title">Titre:</label>
+                              <input type="text" class="form-control" id="title" name="title">
+                              </div>
+                              <div class="form-group">
+                                <label for="content">Contenu:</label>
+                                  <textarea  class="form-control" id="mytextarea" name="content"></textarea>
+                              </div>
+
+                              <div class="form-group">
+                              <label for="content">Selectionnez l'image :</label> 
+                                <input type="file" name="image" id="fileToUpload">                            
+                              </div>
+                                  <button type="submit" class="btn btn-primary">Envoyer</button>
+                            </form>
+                          </div> 
+                    </section> 
+                  </div> 
+                </div>
+              </div>
+            </div>
+            
+        <div class="row">
+          <div class="col-lg-12">
+              <div class="collapse multi-collapse" id="multiCollapseExample3">
+                <div class="card card-body">
+                  <h3 class="mb-0">    Ici , vous pouvez  :
+                      Modifier où supprimer un évènement  et en insérer un nouveau.</h3>
+                      <div class="container text-center">
+                   
+                          <h2>Tableau des Evènements</h2> 
+                          <table class="table table-bordered">
+                            <thead class="thead-light">
+                              <tr>  
+                                <th>Titre Evènement</th>       
+                                <th>Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for event in events %}  
+                              <tr>   
+                                <td>{{event.title}}<br>{{event.event_date}}</td>
+                                <td><a href ="/modifyEvent/{{event.id}}" class="btn btn-secondary" role ="button"><input type="hidden" name="id" value="" />Modifier l'Evènement</a>        
+                              </td> 
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                          <section>
+                              <div class="container text-center">        
+                                  <h2>écrire un nouvel évènement </h2>         
+                                  <p>A vous de jouer !</p>
+                              </div>
+                              <div class = container  id="post">        
+                                <form action="/addEvent" method="post">
+                                  <div class="form-group">
+                                
+                                  <label for="title">Titre:</label>
+                                  <input type="text" class="form-control" id="title" name="title">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="states">Contenu:</label>
+                                      <textarea  class="form-control" id="mytextarea" name="states"></textarea>
+                                  </div>
+                                      <button type="submit" class="btn btn-primary">Envoyer</button>
+                                </form>
+                              </div>       
+                          </section> 
+                  </div>
+              
+            </div>
+          </div>
+         </div>
+        </div>
+      
+        <script src='/public/js/tinymce/tinymce.min.js'></script>
+        
+        <script>
+       
+tinymce.init({
+  selector: 'textarea',
+    
+ });
+   
+        </script>
+
+  {% endblock %}

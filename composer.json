@@ -1,0 +1,20 @@
+{
+    "name": "filature/projet5",
+    "require": {
+        "klein/klein": "v2.1.2",
+        "twig/twig": "^2.0",
+        "katzien/php-mime-type": "^2.1"
+    },
+    "authors": [
+        {
+            "name": "cauzard christian",
+            "email": "zarcoyotte@gmail.com"
+        }
+    ],
+    "description":"site web filature",
+    "autoload": {
+        "psr-4": {
+          "App\\" : "src/"
+        }
+    }
+}

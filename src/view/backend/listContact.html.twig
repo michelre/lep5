@@ -1,0 +1,14 @@
+{% extends "frontend/base.html.twig" %}
+{% block title %}Liste des contacts {% endblock %}
+{% block body %}
+  
+  {{ include('backend/backnavbar.html.twig') }} 
+  <br>
+<div class="container" id="L">
+
+  $error = [];  
+ $message = $_POST['message'];
+ $headers = 'FROM: test@local.dev'
+ mail('cauzard.christian@orange.fr','formulaire de message ',$message,$headers);
+</div>
+{% endblock %}
