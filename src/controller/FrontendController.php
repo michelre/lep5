@@ -7,7 +7,7 @@ use App\Dao\EventDao;
 use App\Dao\ArticleDao;
 use App\Dao\CommentDao;
 use App\Dao\BaseDao;
-
+try{
 class FrontendController
 {
     private $eventDao;
@@ -96,7 +96,7 @@ class FrontendController
     {
         $articles = $this->articleDao->findAll();
         $events = $this->eventDao->findEvents();
-        $comments  = $this->commentDao->getComments($id);
+       // $comments  = $this->commentDao->getComments($articleId);
         $result = $this->commentDao->regroup();
          return $this->twig->render('backend/home.html.twig',['result'=>$result, 'events'=>$events,'articles'=>$articles]);
     }
@@ -118,11 +118,11 @@ class FrontendController
 
 
         ini_set("SMTP", "smtp.orange.fr");
-        
+        ini_set("sendmail_from","cauzard.christian@orange.fr");
        
-        mail( $formData->get('name'),$formData->get('firstname'),$formData->get('email'),$formData->get('phone'),$formData->get('message'));
-        echo "mail envoyé";
-        var_dump($formData);
+        mail($formData->get("name"),$formData->get("firstname"),$formData->get("email"),$formData->get("phone"),$formData->get("message"));
+      
+        
         //return $this->twig->render('frontend/contact.html.twig',[ 'events'=>$events,'articles'=>$articles]);
     }
 
@@ -135,8 +135,9 @@ class FrontendController
         return $this->twig->render('frontend/connect.html.twig',[ 'events'=>$events,'articles'=>$articles]);
     }
 
-
-
+ }
 }
-
+catch (\Exception $e) {
+   var_dump($e->getMessage());
+  }
 

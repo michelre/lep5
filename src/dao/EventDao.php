@@ -19,8 +19,6 @@ class EventDao extends BaseDao
     public function eventPage($offset,$limit)
     {
       $conditionLimit=(isset($offset))?" LIMIT {$offset},{$limit}":"";
-
-        
        
         $req = $this->db->prepare('SELECT * FROM events ORDER BY id'.$conditionLimit );
         $req->execute();
@@ -60,8 +58,6 @@ class EventDao extends BaseDao
        return;
     }
 
-
-
     public function delete($id)
     {
         $query = $this->db->prepare('DELETE FROM events WHERE id=?');
@@ -69,15 +65,12 @@ class EventDao extends BaseDao
         return;
     }
 
-    public function insert($id, $title, $states)
+    public function insert($id, $title, $states,$eimage,$legend)
     {
-     $result = $this->db->prepare('INSERT INTO events(id, title, states, event_date) VALUES(:id, :title, :states, NOW())');    
+     $result = $this->db->prepare('INSERT INTO events(id, title, states, eimage, legend, event_date) VALUES(:id, :title, :states, :eimage, :legend, NOW())');    
               
-        $result->execute(['id'=>$id,'title' => $title,'states'=> $states ]);
+        $result->execute(['id'=>$id,'title' => $title,'states'=> $states, 'eimage'=>$eimage,'legend'=>$legend ]);
     }
-
-
-
 
 }
 

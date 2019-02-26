@@ -12,7 +12,17 @@
     </div>
     <div class="row" id="descrip">
         <p class=" text-center" id ="cont" >{{event.states|raw}}</p>       
-    </div>      
+    </div> 
+    <div class ="container justify-content-center ">
+        <div class ="row">
+           <div class="col-lg-12 text-center ">
+          {#  <a href="{{event.image}}" id ="affichage">Voir</a>#}
+            <img class ="img-responsive"src ="{{event.image}}" id="upimage"> 
+           <figcaption>{{event.legend}}</figcaption>
+         </div>
+        </div>
+     </div>
+    
 </div>
 <br>
 

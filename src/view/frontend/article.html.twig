@@ -2,7 +2,7 @@
 {% block title %}Article{% endblock %}
 {% block body %}
 {{ include('frontend/navbar.html.twig') }} 
-<br><br>
+<br><br><br>
 <div class="container text-center "  id ="art">  
     <div class="row">      
       <em >le: {{article.creation_date|date('d/m/Y')}}</em>
@@ -15,11 +15,13 @@
       <h5 class="text-center" id = "cont">{{article.content|raw}}</h5>       
     </div>   
 </div>
-<div class ="container justify-content-center">
+<div class ="container justify-content-center ">
    <div class ="row">
-      <div class="col-lg 12 text-center ">
-       <a href="{{article.image}}" id ="affichage">Voir</a>
-      </div>
+      <div class="col-lg-12 text-center ">
+     {#  <a href="{{article.image}}" id ="affichage">Voir</a>#}
+       <img class ="img-fluid"src ="{{article.image}}" > 
+      <figcaption>{{article.legend}}</figcaption>
+    </div>
    </div>
 </div>
 <br>
@@ -55,8 +57,8 @@
           </div>
           <div class="row">
              <div class= "col-lg-10 jumbotron">
-             Auteur:   <strong>{{comment.author}}</strong><br>
-              {{comment.comment}}                                   
+             Auteur:   <strong>{{comment.author|raw}}</strong><br>
+              {{comment.comment|raw}}                                   
             </div> 
           </div>
         </div> 

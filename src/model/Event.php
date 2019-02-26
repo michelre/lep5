@@ -7,7 +7,9 @@ class Event implements \JsonSerializable
 
     private $id;
     private $title;
-    private $description;
+    private $states;
+    private $eimage;
+    private $legend;
     private $eventDate;
     /**
      * @return mixed
@@ -48,9 +50,9 @@ class Event implements \JsonSerializable
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function getStates()
     {
-        return $this->description;
+        return $this->states;
     }
 
     /**
@@ -60,6 +62,42 @@ class Event implements \JsonSerializable
     public function setStates($states)
     {
         $this->states = $states;
+        return $this;
+    }
+
+/**
+     * @return mixed
+     */
+    public function getEimage()
+    {
+        return $this->eimage;
+    }
+
+    /**
+     * @param mixed $eimage
+     * @return Event
+     */
+    public function setEimage($eimage)
+    {
+        $this->eimage = $eimage;
+        return $this;
+    }
+
+/**
+     * @return mixed
+     */
+    public function getLegend()
+    {
+        return $this->legend;
+    }
+
+    /**
+     * @param mixed $legend
+     * @return Event
+     */
+    public function setLegend($legend)
+    {
+        $this->legend = $legend;
         return $this;
     }
 
@@ -95,7 +133,9 @@ class Event implements \JsonSerializable
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'description' => $this->description,
+            'states' => $this->states,
+            'eimage' => $this->eimage,
+            'legend'=> $this->legend,
             'event_date'=> $this->setEventDate  
               ];
     }

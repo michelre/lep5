@@ -63,52 +63,74 @@ class BackendController
             $articles = $this->articleDao->findAll();
             $events = $this->eventDao->findEvents();
             $article = $this->articleDao->find($id);
-              return $this->twig->render('backend/modifyArticle.html.twig',[ 'article'=>$article,'events'=>$events,'articles'=>$articles ,'comments'=>$comments]);
+              return $this->twig->render('backend/modifyArticle.html.twig',[ 'article'=>$article,'events'=>$events,'articles'=>$articles]);
               
               }  
 
-         public function changeArticle($id,$formData)
+        public function changeArticle($id,$formData,$files)
          {
             $articles = $this->articleDao->findAll();
             $article = $this->articleDao->find($id);
-            $this->articleDao->update($id,$formData->get("title"),$formData->get("content"));
-            header('location: /admin');
-            die();
-         }
 
-
-
-              public function supprimArticle($id)
-              {
-                 $supprim = $this->articleDao->delete($id);
-
-                 
-                 header('location: /admin');
-                 die();
-                  
-              }
-
-              public function addArticle($formData,$files)
-              {
-                  $articles = $this->articleDao->findAll();
-                 // $article = $this->articleDao->find($id);
-                  $events = $this->eventDao->findEvents();
-
-                 
-                  $file = $files->get('image');
+            $file = $files->get('image');
                   $target_dir = "public/uploads/";
                   $extensions = [  
                      'image/jpeg'=>'.jpg',
                      'image/png'=>'png'
                   ];
                   $imageName = uniqid().$extensions[$file['type']];
+                  
+            if(is_file($image))
+            {
+            unlink('public/uploads/$imageName');
             move_uploaded_file($file["tmp_name"], $target_dir.$imageName);
+            $this->articleDao->update($id,$formData->get("title"),$formData->get("content"),'/public/uploads/'.$imageName,$formData->get("legend"));
+            
+           
+           // header('location: /admin');
+           // die();
+            }           
+         }
+         
 
-                 $this->articleDao->insert($formData->get("id"),$formData->get("title"),$formData->get("content"),'/public/uploads/'.$imageName);
 
-                 header('location: /admin');
-                  die();
+         
+            
+              public function addArticle($formData,$files)
+              {
+                  $articles = $this->articleDao->findAll();
+                  $events = $this->eventDao->findEvents();
+                 
+                  $file = $files->get('image');
+                  $target_dir = "public/uploads/";
+                  $extensions = [  
+                     'image/jpeg'=>'.jpg',
+                     'image/png'=>'.png'
+                  ];
+                  
+                 $imageName = uniqid().$extensions[$file['type']];
+                   move_uploaded_file($file["tmp_name"], $target_dir.$imageName);
+                  
+                
+                 $this->articleDao->insert($formData->get("id"),$formData->get("title"),$formData->get("content"),'/public/uploads/'.$imageName,$formData->get("legend"));
                
+                 header('location: /admin');
+                  die();              
+              }
+
+              public function supprimArticle($id)
+              {
+                 $article = $this->articleDao->find($id);            
+                 $supprim = $this->articleDao->delete($id);
+                $re = '/uploads\/(.*)$/m';
+                preg_match($re, $article->getImage(), $matches);
+               
+                                   
+                   unlink("public/uploads/".$matches[1]);
+                  
+                 header('location: /admin');
+               die();
+                  
               }
 
               public function modifyEvent($id)
@@ -117,7 +139,7 @@ class BackendController
                $articles = $this->articleDao->findAll();
                $event = $this->eventDao->find($id);
                    return $this->twig->render('backend/modifyEvent.html.twig',['events'=>$events,  'event'=>$event, 'article'=>$article,'articles'=>$articles]);
-                   
+                  
               } 
 
                    public function changeEvent($id,$formData)
@@ -133,22 +155,33 @@ class BackendController
                 public function supprimEvent($id)
                {
                   $supprim = $this->eventDao->delete($id);
-                  header('location: /modifyEvent/'.$id);
-                  die();
-                     
+                  header('location: /admin');
+                  die();  
                }
 
-              public function addEvent($formData)
+              public function addEvent($formData,$files)
               {
                 $articles = $this->articleDao->findAll();
                 $article = $this->articleDao->find($id);
                 $events = $this->eventDao->findEvents();
-               // $event = $this->eventDao->find($id);
-                $this->eventDao->insert($formData->get("id"),$formData->get("title"),$formData->get("states"));
+               
+               $file = $files->get('eimage');
+               $target_dir = 'public/uploads/';
+               $extensions = [  
+                  
+                  'image/jpeg'=>'.jpg',
+                  'image/png'=>'.png'
+               ];
+               $eimageName = uniqid().$extensions[$file['type']];
+                 move_uploaded_file($file["tmp_name"], $target_dir.$eimageName);
+
+                $this->eventDao->insert($formData->get("id"),$formData->get("title"),$formData->get("states"),'/public/uploads/'.$eimageName, $formData->get("legend"));
                 
       
-               return $this->twig->render('frontend/home.html.twig',['article'=>$article,'articles'=>$articles,'events'=>$events]);
-                 die();
+          // return $this->twig->render('frontend/home.html.twig',['article'=>$article,'articles'=>$articles,'events'=>$events]);
+            //     die();
+                 header('location: /admin');
+                 die();  
               }
 
               public function verify($name,$pass)
@@ -167,7 +200,6 @@ class BackendController
                  }
                }
                        
-
       }
    }
 catch (\Exception $e) {

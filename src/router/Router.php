@@ -84,7 +84,7 @@ class Router
                     });
 
                     $this->klein->respond('POST', '/changeArticle/[:id]', function($request){
-                        return $this->backendController->changeArticle($request->id,$request->paramsPost());   
+                        return $this->backendController->changeArticle($request->id,$request->paramsPost(),$request->files());   
                     });
 
                     $this->klein->respond('POST', '/addArticle', function($request){
@@ -112,7 +112,7 @@ class Router
 
 
                     $this->klein->respond('POST', '/addEvent', function($request){
-                        return $this->backendController->addEvent( $request->paramsPost());
+                        return $this->backendController->addEvent( $request->paramsPost(),$request->files());
                         });
 
                     $this->klein->respond('POST', '/contact/', function($request){
@@ -123,11 +123,7 @@ class Router
                         return $this->backendController->verify($request->name,$request->pass);
                         });  
     
-                    /* $this->klein->respond('POST', '/upload', function($files){
-                            return $this->backendController->uploadImage($files->name);
-                            }); */    
-
-
+                
                    $this->klein->dispatch();
         }
    

@@ -8,6 +8,7 @@ class Article implements \JsonSerializable
     private $title;
     private $content;
     private $image;
+    private $legend;
     private $creationDate;
     /**
      * @return mixed
@@ -84,6 +85,24 @@ class Article implements \JsonSerializable
 /**
      * @return mixed
      */
+    public function getLegend()
+    {
+        return $this->legend;
+    }
+
+    /**
+     * @param mixed $legend
+     * @return Article
+     */
+    public function setLegend($legend)
+    {
+        $this->legend = $legend;
+        return $this;
+    }
+
+/**
+     * @return mixed
+     */
     public function getCreationDate()
     {
         return $this->creationDate;
@@ -113,6 +132,7 @@ class Article implements \JsonSerializable
             'title' => $this->title,
             'content' => $this->content,
             'image' => $this->image,
+            'legend'=> $this->legend,
             'creationDate'=> $this->creationDate
         ];
     }

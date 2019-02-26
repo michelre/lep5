@@ -112,7 +112,7 @@
 #evenement{min-height:560px;margin-top: 130px;}
 #titre,#cont { margin: auto; }
 
-#art{min-height: 250px;}
+#art{min-height: 300px;}
 th{background-color:cadetblue;}
 .FC{
   min-height:560px;margin-top: 130px;
@@ -147,12 +147,11 @@ th{background-color:cadetblue;}
     margin:auto ;
   }
 
-#affichage{
- width:400px; height:300px;   margin:auto; text-align:center; border:2px solid blue;
 
+
+#upimage{
+  max-width:600px; max-height:400px;  margin:auto; text-align:center; border:2px solid blue;
 }
-
-
 
 
 
