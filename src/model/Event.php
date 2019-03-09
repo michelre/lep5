@@ -68,18 +68,18 @@ class Event implements \JsonSerializable
 /**
      * @return mixed
      */
-    public function getEimage()
+    public function getImage()
     {
-        return $this->eimage;
+        return $this->image;
     }
 
     /**
-     * @param mixed $eimage
+     * @param mixed $image
      * @return Event
      */
-    public function setEimage($eimage)
+    public function setEimage($image)
     {
-        $this->eimage = $eimage;
+        $this->image = $image;
         return $this;
     }
 
@@ -134,7 +134,7 @@ class Event implements \JsonSerializable
             'id' => $this->id,
             'title' => $this->title,
             'states' => $this->states,
-            'eimage' => $this->eimage,
+            'image' => $this->image,
             'legend'=> $this->legend,
             'event_date'=> $this->setEventDate  
               ];

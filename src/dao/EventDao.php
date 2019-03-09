@@ -51,10 +51,10 @@ class EventDao extends BaseDao
         
     }
 
-    public function update($id, $title, $states)
+    public function update($id, $title, $states,$image,$legend)
     {
-       $query = $this->db->prepare('UPDATE events SET title=:title , states=:states  WHERE id=:id');
-       $query->execute(['id'=>$id,'title'=>$title,'states'=>$states]);       
+       $query = $this->db->prepare('UPDATE events SET title=:title , states=:states, image=:image, legend=:legend  WHERE id=:id');
+       $query->execute(['id'=>$id,'title'=>$title,'states'=>$states, 'image'=>$image,'legend'=>$legend ]);       
        return;
     }
 
@@ -65,11 +65,11 @@ class EventDao extends BaseDao
         return;
     }
 
-    public function insert($id, $title, $states,$eimage,$legend)
+    public function insert($id, $title, $states,$image,$legend)
     {
-     $result = $this->db->prepare('INSERT INTO events(id, title, states, eimage, legend, event_date) VALUES(:id, :title, :states, :eimage, :legend, NOW())');    
+     $result = $this->db->prepare('INSERT INTO events(id, title, states, image, legend, event_date) VALUES(:id, :title, :states, :image, :legend, NOW())');    
               
-        $result->execute(['id'=>$id,'title' => $title,'states'=> $states, 'eimage'=>$eimage,'legend'=>$legend ]);
+        $result->execute(['id'=>$id,'title' => $title,'states'=> $states, 'image'=>$image,'legend'=>$legend ]);
     }
 
 }

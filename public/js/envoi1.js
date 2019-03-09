@@ -20,9 +20,8 @@ function validation(event){
         missAuthor.textContent = 'Format incorrect';
         missAuthor.style.color = 'orange';
     }
-     
-     
-       if(commentaire.validity.valueMissing){
+          
+    else if(commentaire.validity.valueMissing){
             event.preventDefault();
             missCommentaire.textContent = 'texte Manquant';
             missCommentaire.style.color = 'red';  

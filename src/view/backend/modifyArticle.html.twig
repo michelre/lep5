@@ -12,7 +12,7 @@
     </div>
     <section>
           <div class = container  id="post">          
-            <form action="/changeArticle/{{article.id}}" method="post">
+            <form action="/changeArticle/{{article.id}}" method="post" enctype="multipart/form-data">
               <div class="form-group">
               <label for="title">Titre:</label>
               <input type="text" class="form-control" id="title" name="title" value ="{{article.title}}">
@@ -29,8 +29,6 @@
                     <label for="legend">légende:</label>
                   <input type="text" class="form-control" id="legend" name="legend">                           
                   </div>
-
-
                     <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>
           </div>
@@ -40,6 +38,7 @@
               <button type="submit" class="btn btn-danger">Supprimer</button>
              </form>
         </div>
+        <br>
     </section>
 </section> 
 {% block javascripts %}

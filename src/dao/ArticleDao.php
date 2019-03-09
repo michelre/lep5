@@ -54,14 +54,14 @@ class ArticleDao extends BaseDao
         return;
     }
 
-    public function update($id, $title, $content,$image,$legend)
+    public function update($id, $title, $content, $image, $legend)
     {
-       $query = $this->db->prepare('UPDATE articles SET title=:title , content=:content, image=:image,legend=:legend  WHERE id=:id');
+       $query = $this->db->prepare('UPDATE articles SET title=:title , content=:content, image=:image, legend=:legend  WHERE id=:id');
        $query->execute(['id'=>$id,'title'=>$title,'content'=>$content,'image'=>$image, 'legend'=>$legend]);       
        return;
     }
 
-    public function insert($id, $title, $content,$image,$legend)
+    public function insert($id, $title, $content, $image, $legend)
     {
      $result = $this->db->prepare('INSERT INTO articles(id, title, content,image, legend, creation_date) VALUES(:id, :title, :content, :image, :legend, NOW())');    
               

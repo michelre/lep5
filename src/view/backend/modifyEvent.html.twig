@@ -13,7 +13,7 @@
     </div>
     <section>
           <div class = container  id="post">          
-            <form action="/changeEvent/{{event.id}}" method="post">
+            <form action="/changeEvent/{{event.id}}" method="post" enctype="multipart/form-data" >
               <div class="form-group">
               <label for="title">Titre:</label>
               <input type="text" class="form-control" id="title" name="title" value ="{{event.title}}">
@@ -22,6 +22,14 @@
                     <label for="content">Contenu:</label>
                     <textarea  class="form-control" id="mytextarea" name="content">{{event.states}}</textarea>
                 </div>
+                <div class="form-group">
+                  <label for="image">Selectionnez une nouvelle image :</label> 
+                    <input type="file" name="image">
+                  </div>  
+                  <div class="form-group">   
+                    <label for="legend">légende:</label>
+                  <input type="text" class="form-control" id="legend" name="legend">                           
+                  </div>
                     <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>
           </div>

@@ -11,33 +11,38 @@
 </div>
 <div class="container">
  <div class="stated-template">
-    <form method="post" name="formulaire" action="/contact/">
+    <form method="post" name="formulaire" action="/contact/" >
      <div class="row">
       <div class="col-md-6"> 
         <div class ="form-group">       
             <label for="nom" class="police_contact">Nom</label>
-            <input required type="text" id="nom" name="name" class="form-control" >        
+            <input required type="text" id="nom" name="name" maxlength="50" class="form-control" > 
+            <span id="missNom"></span><br>     
         </div>
       </div>
-        <div class="col-md-6"> 
+      <div class="col-md-6"> 
         <div class ="form-group">       
             <label for="prenom" class="police_contact">prénom</label>
-            <input required type="text" id="prenom" name="firstname" class="form-control" >        
+            <input required type="text" id="prenom" name="firstname"  maxlength="50" class="form-control" > 
+            <span id="missPrenom"></span><br>
         </div>
       </div>
      </div>
+     <div class="row">
       <div class="col-md-12"> 
             <div class ="form-group">       
-                <label for="email" class="police_contact">Votre email</label>
-                <input required type="email" id="email" name="email" class="form-control">        
+                <label for="email" class="police_contact">Votre courriel</label>
+                <input required id="email" name="email" class="form-control"> 
+                <span id="missEmail"></span><br>
             </div>
           </div> 
-      
+     </div>
      <div class="row">
             <div class="col-md-12"> 
               <div class ="form-group">       
-                  <label for="phone" class="police_contact">Telephone</label>
-                  <input required type="tel" id="phone" name="phone" class="form-control">        
+                  <label for="phone" class="police_contact">Téléphone</label>
+                  <input required type="tel" id="phone" name="phone" class="form-control">
+                  <span id="missPhone"></span><br>
               </div>
             </div> 
      </div> 
@@ -45,7 +50,8 @@
             <div class="col-md-12"> 
               <div class ="form-group">       
                   <label for="message" class="police_contact">Message</label>
-                  <textarea required id="message" name="message"class="form-control"  ></textarea>        
+                  <textarea required id="message" name="message" maxlength="100" class="form-control"  ></textarea>
+                  <span id="missMessage"></span><br>      
               </div>
             </div> 
      </div>           
@@ -57,12 +63,10 @@
  </form>
 </div>
 </div>
+<br>
+
 </section>
 <section>
  
-
-
-
-
 </section>
 {% endblock %}

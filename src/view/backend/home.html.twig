@@ -97,27 +97,24 @@
                             <p>A vous de jouer !</p>
                         </div>
                       
-                          <div class = container  id="post">        
+                          <div class =" container text-center"  id="post">        
                             <form action="/addArticle" method="post" enctype="multipart/form-data">
-                              <div class="form-group">
-                            
+                              <div class="form-group">                           
                               <label for="title">Titre:</label>
                               <input type="text" class="form-control" id="title" name="title">
                               </div>
                               <div class="form-group">
-                                <label for="content">Contenu:</label>
+                                 <label for="content">Contenu:</label>
                                   <textarea  class="form-control" id="mytextarea" name="content"></textarea>
                               </div>
-
                               <div class="form-group">
                                 <label for="image">Selectionnez l'image :</label> 
                                   <input type="file" name="image">
-                                </div>  
-                                <div class="form-group">   
+                             </div>  
+                             <div class="form-group">   
                                   <label for="legend">légende:</label>
                                 <input type="text" class="form-control" id="legend" name="legend">                           
-                                </div>
-
+                             </div>
                                   <button type="submit" class="btn btn-primary">Envoyer</button>
                             </form>
                           </div> 
@@ -160,9 +157,8 @@
                                   <p>A vous de jouer !</p>
                               </div>
                               <div class = container  id="post">        
-                                <form action="/addEvent" method="post">
-                                  <div class="form-group">
-                                
+                                <form action="/addEvent" method="post" enctype="multipart/form-data">
+                                  <div class="form-group">                                
                                   <label for="title">Titre:</label>
                                   <input type="text" class="form-control" id="title" name="title">
                                   </div>
@@ -171,34 +167,28 @@
                                       <textarea  class="form-control" id="mytextarea" name="states"></textarea>
                                   </div>
                                   <div class="form-group">
-                                    <label for="eimage">Selectionnez l'image :</label> 
+                                    <label for="image">Selectionnez l'image :</label> 
                                       <input type="file" name="eimage">
                                     </div>  
                                     <div class="form-group">   
                                       <label for="legend">légende:</label>
                                     <input type="text" class="form-control" id="legend" name="legend">                           
                                     </div>
-
-                                      <button type="submit" class="btn btn-primary">Envoyer</button>
+                                     <button type="submit" class="btn btn-primary">Envoyer</button>
                                 </form>
                               </div>       
                           </section> 
-                  </div>
-              
+                  </div>              
             </div>
           </div>
          </div>
-        </div>
-      
-        <script src='/public/js/tinymce/tinymce.min.js'></script>
-        
-        <script>
-       
-tinymce.init({
-  selector: 'textarea',
-    
- });
-   
+        </div>      
+        <script src='/public/js/tinymce/tinymce.min.js'></script>        
+        <script>       
+        tinymce.init({
+          selector: 'textarea',
+           
+             
+        });  
         </script>
-
   {% endblock %}

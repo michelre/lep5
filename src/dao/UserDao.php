@@ -13,6 +13,8 @@ class UserDao extends BaseDao
         $query ->setFetchMode(PDO::FETCH_CLASS, User::class);
         $query->execute(array($name));
          return $query->fetch();
+      
+        $donnees = json_encode($query->fetch());
     }  
 
 }

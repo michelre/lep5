@@ -4,6 +4,7 @@ namespace App\Dao;
 use PDO;
 class BaseDao 
 {
+    
     protected $db;
     public function __construct()
     {  

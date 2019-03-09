@@ -7,6 +7,10 @@ use App\Dao\ArticleDao;
 use App\Dao\CommentDao;
 use App\Dao\UserDao;
 use App\Dao\BaseDao;
+use App\Model\User;
+use App\Service\AuthentificationService;
+use App\Service\FileService;
+
 
 try{
 class BackendController
@@ -15,8 +19,9 @@ class BackendController
     private $articleDao;
     private $commentDao;
     private $userDao;
+    private $fileService;
     private $twig;
-
+    private $authentificationService;
     /**
      * BackendController constructor.
      * @param \Twig_Environment $twig
@@ -27,23 +32,32 @@ class BackendController
         $this->articleDao = new ArticleDao();
         $this->commentDao = new CommentDao();
         $this->userDao = new UserDao();
+        $this->fileService = new FileService();
+        $this->authentificationService = new AuthentificationService();
         $this->twig = $twig;
     }
 
-   /* public function connection()
-    {
-      $articles = $this->articleDao->findAll();
-      $events = $this->eventDao->findEvents();
-      $result = $this->commentDao->regroup();
-        return $this->twig->render('backend/home.html.twig',['result'=>$result,'events'=>$events,'articles'=>$articles]);
-        
-    }*/
-    
 
-    public function driveComment()
-    {
-      $articles = $this->articleDao->findAll();
-      $events = $this->eventDao->findEvents();
+    public function admin()
+    {       
+            $articles = $this->articleDao->findAll();
+            $events = $this->eventDao->findEvents();
+            $result = $this->commentDao->regroup();
+            return $this->twig->render('backend/home.html.twig',['result'=>$result, 'events'=>$events,'articles'=>$articles]);       
+    }
+
+
+           public function disconnect(){
+           $this->authentificationService->disconnect();
+           header('Location: /connect');
+           die();
+           }
+   
+         public function driveComment()
+         {
+
+         $articles = $this->articleDao->findAll();
+         $events = $this->eventDao->findEvents();
          $result = $this->commentDao->regroup();
          
          return $this->twig->render('backend/home.html.twig',['result'=>$result,'events'=>$events, 'articles'=>$articles]);
@@ -51,53 +65,64 @@ class BackendController
          }
 
 
-    public function destroy($id)
+         public function destroy($id)
          {
+            
             $destroyed = $this->commentDao->delete($id);
             header('location: /admin');
-            die();   
+            die();
+         
          }
 
          public function modifyArticle($id)
          {
+            
             $articles = $this->articleDao->findAll();
             $events = $this->eventDao->findEvents();
             $article = $this->articleDao->find($id);
               return $this->twig->render('backend/modifyArticle.html.twig',[ 'article'=>$article,'events'=>$events,'articles'=>$articles]);
-              
+            
               }  
 
         public function changeArticle($id,$formData,$files)
-         {
+      {
+            
             $articles = $this->articleDao->findAll();
             $article = $this->articleDao->find($id);
 
-            $file = $files->get('image');
+               // $this->fileService->supprimImage($image);
+               // $this->fileService->chargeImage($image);
+               if(!empty($files->get('image'))) {   
+              $re = '/uploads\/(.*)$/m';
+               preg_match($re, $article->getImage(), $matches);                                             
+                  unlink("public/uploads/".$matches[1]);
+                  
+                  $file = $files->get('image');
+                 
                   $target_dir = "public/uploads/";
                   $extensions = [  
                      'image/jpeg'=>'.jpg',
-                     'image/png'=>'png'
+                     'image/png'=>'.png'
                   ];
-                  $imageName = uniqid().$extensions[$file['type']];
+                 
+                  $imageName = uniqid().$extensions[$file['type']];             
+                  move_uploaded_file($file["tmp_name"], $target_dir.$imageName);
+               }
+                 
+
                   
-            if(is_file($image))
-            {
-            unlink('public/uploads/$imageName');
-            move_uploaded_file($file["tmp_name"], $target_dir.$imageName);
-            $this->articleDao->update($id,$formData->get("title"),$formData->get("content"),'/public/uploads/'.$imageName,$formData->get("legend"));
-            
-           
-           // header('location: /admin');
-           // die();
-            }           
+                  
+            $this->articleDao->update($id,$formData->get("title"),$formData->get("content"),'/public/uploads/'.$imageName, $formData->get("legend"));
+                       
+            header('location: /admin');
+            die();
+             
+                 
          }
-         
-
-
-         
-            
+                  
               public function addArticle($formData,$files)
               {
+               
                   $articles = $this->articleDao->findAll();
                   $events = $this->eventDao->findEvents();
                  
@@ -110,31 +135,32 @@ class BackendController
                   
                  $imageName = uniqid().$extensions[$file['type']];
                    move_uploaded_file($file["tmp_name"], $target_dir.$imageName);
-                  
-                
-                 $this->articleDao->insert($formData->get("id"),$formData->get("title"),$formData->get("content"),'/public/uploads/'.$imageName,$formData->get("legend"));
+                 
+                 $this->articleDao->insert($formData->get("id"),$formData->get("title"),$formData->get("content"),'/public/uploads/'.$imageName, $formData->get("legend"));
                
                  header('location: /admin');
-                  die();              
+                  die();
+                
               }
 
               public function supprimArticle($id)
               {
-                 $article = $this->articleDao->find($id);            
-                 $supprim = $this->articleDao->delete($id);
-                $re = '/uploads\/(.*)$/m';
-                preg_match($re, $article->getImage(), $matches);
                
-                                   
-                   unlink("public/uploads/".$matches[1]);
-                  
+                 $article = $this->articleDao->find($id);
+
+                 $supprim = $this->articleDao->delete($id);
+                 $re = '/uploads\/(.*)$/m';
+                 preg_match($re, $article->getImage(), $matches);                    
+                 unlink("public/uploads/".$matches[1]);
+                 //$this->fileService->supprimImage($id);
                  header('location: /admin');
                die();
-                  
+            
               }
 
               public function modifyEvent($id)
               {
+                
                $events = $this->eventDao->findEvents();
                $articles = $this->articleDao->findAll();
                $event = $this->eventDao->find($id);
@@ -144,64 +170,63 @@ class BackendController
 
                    public function changeEvent($id,$formData)
                    {
-                      $articles = $this->articleDao->findAll();
-                      $article = $this->articleDao->find($id);
-                      
+                     
+                      $events = $this->eventDao->findEvents();
+                      $event = $this->eventDao->find($id);
                       $this->eventDao->update($id,$formData->get("title"),$formData->get("states"));
                       header('location: /admin');
                       die();
+                     
                    }
                    
                 public function supprimEvent($id)
                {
+                  
                   $supprim = $this->eventDao->delete($id);
                   header('location: /admin');
                   die();  
+              
                }
 
               public function addEvent($formData,$files)
               {
-                $articles = $this->articleDao->findAll();
-                $article = $this->articleDao->find($id);
+              
                 $events = $this->eventDao->findEvents();
-               
+            
                $file = $files->get('eimage');
                $target_dir = 'public/uploads/';
                $extensions = [  
-                  
                   'image/jpeg'=>'.jpg',
                   'image/png'=>'.png'
                ];
-               $eimageName = uniqid().$extensions[$file['type']];
-                 move_uploaded_file($file["tmp_name"], $target_dir.$eimageName);
-
-                $this->eventDao->insert($formData->get("id"),$formData->get("title"),$formData->get("states"),'/public/uploads/'.$eimageName, $formData->get("legend"));
+               
+               $imageName = uniqid().$extensions[$file['type']];
+                   move_uploaded_file($file["tmp_name"], $target_dir.$imageName);
                 
-      
-          // return $this->twig->render('frontend/home.html.twig',['article'=>$article,'articles'=>$articles,'events'=>$events]);
-            //     die();
+                $this->eventDao->insert($formData->get("id"),$formData->get("title"),$formData->get("states"),'/public/uploads/'.$imageName, $formData->get("legend"));
+               
                  header('location: /admin');
-                 die();  
+                 die(); 
+               
               }
 
-              public function verify($name,$pass)
-              {
-                $articles = $this->articleDao->findAll();
-                $events = $this->eventDao->findEvents();
-                $result = $this->commentDao->regroup();
-                $user = $this->userDao->select($name,$pass);
-               
-               $isPasswordCorrect = password_verify($pass, $user->getPass()); 
-                
-               if ($isPasswordCorrect)                  
-                  {
-                     // $this->authentificationService->createCookie();                                        
-                  return $this->twig->render('backend/home.html.twig',['result'=>$result,'events'=>$events, 'articles'=>$articles]);
-                 }
-               }
+              /**
+     * @param array $payload
+     */
+    public function loginAction($payload)
+    {
+        /** @var User $user */
+        $user = $this->userDao->select($payload['login'], $payload['password']);
+        $isPasswordCorrect = password_verify($payload['password'], $user->getPass());
+        if($isPasswordCorrect){
+            $token = $this->authentificationService->createToken($user->getId());
+            return json_encode(['status' => 'ok', 'token' => $token]);
+        }
+        return json_encode(['status' => 'ko']);
+    }
                        
       }
    }
 catch (\Exception $e) {
-   var_dump($e->getMessage());
+   var_dump($e->getMessage("mais dis donc! il y a une erreur là!"));
   }

@@ -20,7 +20,7 @@
   width: auto;
   margin-top: -22px;
   padding: 16px;
-  color: white;
+  color:white;
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
@@ -37,7 +37,10 @@
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
   background-color: rgba(0,0,0,0.8);
+  
 }
+
+
 
 /* Caption text */
 .text {
@@ -84,7 +87,7 @@
 }
 
 .carousel-item{
-  background-color: linen;
+  background-color: rgb(206, 209, 177);
 }
 
 @-webkit-keyframes fade {
@@ -105,12 +108,13 @@
   #footer{
     border: 1px solid black; background-color: rgb(41, 38, 38);height: 80px;width: 100%;margin-bottom: 1px;
 }
-.d-block {max-width: 1350px;max-height: 750px;margin: auto;margin-top: 70px;
+.d-block {max-width: 1000px;max-height: 700px;margin: auto;margin-top: 70px;
 
 }
 #controle{ min-height:560px;margin-top: 130px;}
 #evenement{min-height:560px;margin-top: 130px;}
-#titre,#cont { margin: auto; }
+#titre{margin: auto;}
+#cont { margin: auto;border: 4px groove rgb(231, 228, 50); text-align:auto; box-shadow: 0px 0px 6px  black inset;}
 
 #art{min-height: 300px;}
 th{background-color:cadetblue;}
@@ -124,7 +128,7 @@ th{background-color:cadetblue;}
   min-height:530px;margin-top: 130px;
 }
 #titre_event{
-   max-width: 400px;min-height: 80px; border: 2px solid blue; border-radius: 5px;margin: auto;background-color: cadetblue;color:burlywood;
+   max-width: 400px;min-height: 80px; border: 2px solid blue; border-radius: 5px;margin: auto;background-color: rgb(38, 46, 46);color:burlywood;
 }
 #descrip{
   margin-top: 100px;
@@ -136,7 +140,7 @@ th{background-color:cadetblue;}
   min-height:530px;margin-top: 130px;
 }
 #bulle{
-  border: 1px solid green;background-color: chartreuse; border-radius:4px; color: honeydew;height: 80px; margin-top: 200px;}
+  border: 1px solid green;background-color: chartreuse; border-radius:4px; color: honeydew;height: 80px; margin-top: 100px;}
   #vid{
     min-width: 1000px;min-height: 600px; border: solid 5px black;margin: auto;
   }
@@ -146,16 +150,20 @@ th{background-color:cadetblue;}
   .mb-0{
     margin:auto ;
   }
-
+p{color:black;word-wrap: break-word; }
 
 
 #upimage{
-  max-width:600px; max-height:400px;  margin:auto; text-align:center; border:2px solid blue;
+  max-width:600px; max-height:600px;  margin:auto; text-align:center; border:2px double grey;
 }
+.img-fluid{
+  border: 15px groove rgb(247, 169, 2); max-height: 700px;
+}
+.jumbotron{background-color:rgb(214, 187, 130); }
+
+@media all and (max-width:785px){
+  h1{font-size:1.5em;}
+button{margin-bottom:5px; }
 
 
-
-
- 
-
-
+}

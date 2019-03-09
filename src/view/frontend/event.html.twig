@@ -10,19 +10,21 @@
     <div class="row" id ="titre_event">      
         <h2 class="text-center mb-10" id = "titre">{{event.title}}</h2>
     </div>
+    <br>
     <div class="row" id="descrip">
-        <p class=" text-center" id ="cont" >{{event.states|raw}}</p>       
+        <div class="col-lg-12 " id ="cont" ><p>{{event.states|raw}}</p>       
     </div> 
+</div>
+    <br>
     <div class ="container justify-content-center ">
         <div class ="row">
            <div class="col-lg-12 text-center ">
           {#  <a href="{{event.image}}" id ="affichage">Voir</a>#}
-            <img class ="img-responsive"src ="{{event.image}}" id="upimage"> 
+            <img class ="img-fluid"src ="{{event.image}}"> 
            <figcaption>{{event.legend}}</figcaption>
          </div>
         </div>
      </div>
-    
 </div>
 <br>
 

@@ -7,6 +7,8 @@ use App\Dao\EventDao;
 use App\Dao\ArticleDao;
 use App\Dao\CommentDao;
 use App\Dao\BaseDao;
+use App\Service\AuthentificationService;
+
 try{
 class FrontendController
 {
@@ -14,6 +16,7 @@ class FrontendController
     private $articleDao;
     private $commentDao;
     private $twig;
+    private $authentificationService;
 
     /**
      * FrontendController constructor.
@@ -25,6 +28,7 @@ class FrontendController
         $this->articleDao = new ArticleDao();
         $this->commentDao = new CommentDao();
         $this->twig = $twig;
+        $this->authentificationService = new AuthentificationService();
     }
       
     public function home()
@@ -86,20 +90,12 @@ class FrontendController
     public function addComment($articleId,$formData)
     {
       
-
       $this->commentDao->insert($articleId,$formData->get("author"),$formData->get("comment"));
        header('location: /article/'. $articleId);
        die();
     }
 
-    public function admin()
-    {
-        $articles = $this->articleDao->findAll();
-        $events = $this->eventDao->findEvents();
-       // $comments  = $this->commentDao->getComments($articleId);
-        $result = $this->commentDao->regroup();
-         return $this->twig->render('backend/home.html.twig',['result'=>$result, 'events'=>$events,'articles'=>$articles]);
-    }
+    
 
     public function contact()
     {
@@ -114,24 +110,66 @@ class FrontendController
         $articles = $this->articleDao->findAll();
         $events = $this->eventDao->findEvents();
 
-        $destinataire = "zarcoyotte@gmail.com";
+        $name = $formData->get('name');
+        $firstName = $formData->get('firstname');
+        $email = $formData->get('email');
+        $phone = $formData->get('phone');
+        $message = $formData->get('message');
 
+        $options = [
+            'name' => FILTER_SANITIZE_STRING,
+            'firstname' => FILTER_SANITIZE_STRING,
+            'email' => FILTER_VALIDATE_EMAIL,
+            'phone' => FILTER_SANITIZE_STRING,
+            'message' => FILTER_SANITIZE_STRING
+        ];
+        $resultat = filter_input_array(INPUT_POST, $options);
 
-        ini_set("SMTP", "smtp.orange.fr");
-        ini_set("sendmail_from","cauzard.christian@orange.fr");
-       
-        mail($formData->get("name"),$formData->get("firstname"),$formData->get("email"),$formData->get("phone"),$formData->get("message"));
-      
+        if($resultat['email'] === false) {
+           
+             
+            header('Location:/contact');
+        }
+        else{
+             
+            echo "<p>Merci pour votre message! Je ferai mon possible pour vous répondre dans les plus brefs délais.</p>";
+             
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+        $headers .= 'FROM:' . $email;
+        $to = 'zarcoyotte@gmail.com';
+        $subject = 'Message envoyé par :' . $name .' - <i>' .$firstName .'</i>'; '- <i>' .$email .'</i>';'- <i>' .$phone .'</i>';
+     $message_content = '
+        <table>
+        <tr>
+        <td><b>Emetteur du message:</b></td>
+        </tr>
+        <tr>
+        <td>'. $subject . '</td>
+        </tr>
+        <tr>
+        <td><b>Contenu du message:</b></td>
+        </tr>
+        <tr>
+        <td>'.$message .'</td>
+        </tr>
+        </table>
+        ';
         
-        //return $this->twig->render('frontend/contact.html.twig',[ 'events'=>$events,'articles'=>$articles]);
+      mail($to, $subject, $message_content, $headers);
+        header('Location: /contact');
+           
+
+        }
+        
     }
 
     public function connect()
     {
-       
+      
         $articles = $this->articleDao->findAll();
         $events = $this->eventDao->findEvents();
-        
+               
         return $this->twig->render('frontend/connect.html.twig',[ 'events'=>$events,'articles'=>$articles]);
     }
 
