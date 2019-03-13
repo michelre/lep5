@@ -128,7 +128,7 @@ class Router
 
                     $this->klein->respond('POST', '/changeEvent/[:id]', function($request){
                         $this->protect($request);
-                        return $this->backendController->changeEvent($request->id,$request->paramsPost());   
+                        return $this->backendController->changeEvent($request->id,$request->paramsPost(),$request->files());   
                     });
 
 

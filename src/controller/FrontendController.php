@@ -132,20 +132,20 @@ class FrontendController
         }
         else{
              
-            echo "<p>Merci pour votre message! Je ferai mon possible pour vous répondre dans les plus brefs délais.</p>";
+          // echo 'merci de votre message '; 
              
         $headers  = 'MIME-Version: 1.0' . "\r\n";
-        $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-        $headers .= 'FROM:' . $email;
-        $to = 'zarcoyotte@gmail.com';
-        $subject = 'Message envoyé par :' . $name .' - <i>' .$firstName .'</i>'; '- <i>' .$email .'</i>';'- <i>' .$phone .'</i>';
+        $headers .= 'Content-type: text/html; charset=utf8'."\r\n";
+        $headers .= 'FROM:' . $email."\r\n";
+        $to = 'cauzard.christian@orange.fr';
+        $subject = 'Prise de contact';
      $message_content = '
         <table>
         <tr>
         <td><b>Emetteur du message:</b></td>
         </tr>
         <tr>
-        <td>'. $subject . '</td>
+        <td>Message envoyé par :'.$name.'  '.$firstName.' ; '.$email.' ; '.$phone.' </td>
         </tr>
         <tr>
         <td><b>Contenu du message:</b></td>
@@ -157,7 +157,16 @@ class FrontendController
         ';
         
       mail($to, $subject, $message_content, $headers);
-        header('Location: /contact');
+
+      echo"<html>
+      <head>
+          <title>Message Envoyé !</title>
+      </head>
+      <body onLoad=\"javascript:alert('Message Envoyé!');window.location='/contact'\">
+      </body>
+          </html>";
+      
+       // header('Location: /contact');
            
 
         }

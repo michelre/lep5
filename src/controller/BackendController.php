@@ -19,7 +19,6 @@ class BackendController
     private $articleDao;
     private $commentDao;
     private $userDao;
-    private $fileService;
     private $twig;
     private $authentificationService;
     /**
@@ -32,7 +31,6 @@ class BackendController
         $this->articleDao = new ArticleDao();
         $this->commentDao = new CommentDao();
         $this->userDao = new UserDao();
-        $this->fileService = new FileService();
         $this->authentificationService = new AuthentificationService();
         $this->twig = $twig;
     }
@@ -90,13 +88,12 @@ class BackendController
             $articles = $this->articleDao->findAll();
             $article = $this->articleDao->find($id);
 
-               // $this->fileService->supprimImage($image);
-               // $this->fileService->chargeImage($image);
+               
                if(!empty($files->get('image'))) {   
               $re = '/uploads\/(.*)$/m';
                preg_match($re, $article->getImage(), $matches);                                             
                   unlink("public/uploads/".$matches[1]);
-                  
+
                   $file = $files->get('image');
                  
                   $target_dir = "public/uploads/";
@@ -108,16 +105,11 @@ class BackendController
                   $imageName = uniqid().$extensions[$file['type']];             
                   move_uploaded_file($file["tmp_name"], $target_dir.$imageName);
                }
-                 
-
-                  
-                  
+                                   
             $this->articleDao->update($id,$formData->get("title"),$formData->get("content"),'/public/uploads/'.$imageName, $formData->get("legend"));
                        
             header('location: /admin');
-            die();
-             
-                 
+            die();                 
          }
                   
               public function addArticle($formData,$files)
@@ -152,7 +144,7 @@ class BackendController
                  $re = '/uploads\/(.*)$/m';
                  preg_match($re, $article->getImage(), $matches);                    
                  unlink("public/uploads/".$matches[1]);
-                 //$this->fileService->supprimImage($id);
+                 
                  header('location: /admin');
                die();
             
@@ -168,12 +160,30 @@ class BackendController
                   
               } 
 
-                   public function changeEvent($id,$formData)
+                   public function changeEvent($id,$formData,$files)
                    {
                      
                       $events = $this->eventDao->findEvents();
                       $event = $this->eventDao->find($id);
-                      $this->eventDao->update($id,$formData->get("title"),$formData->get("states"));
+
+                      if(!empty($files->get('image'))) {   
+                        $re = '/uploads\/(.*)$/m';
+                         preg_match($re, $event->getImage(), $matches);                                             
+                            unlink("public/uploads/".$matches[1]);
+          
+                            $file = $files->get('image');
+                           
+                            $target_dir = "public/uploads/";
+                            $extensions = [  
+                               'image/jpeg'=>'.jpg',
+                               'image/png'=>'.png'
+                            ];
+                           
+                            $imageName = uniqid().$extensions[$file['type']];             
+                            move_uploaded_file($file["tmp_name"], $target_dir.$imageName);
+                         }
+
+                      $this->eventDao->update($id,$formData->get("title"),$formData->get("states"),'/public/uploads/'.$imageName, $formData->get("legend"));
                       header('location: /admin');
                       die();
                      
