@@ -30,7 +30,15 @@ class FrontendController
         $this->twig = $twig;
         $this->authentificationService = new AuthentificationService();
     }
-      
+    public function er()
+    {       
+        header("HTTP/1.0 404 Not Found"); 
+        die();      
+    } 
+
+
+
+
     public function home()
     {
         
@@ -48,9 +56,7 @@ class FrontendController
        $nbarticles = $this->articleDao->count();
        $nbPages= ceil($nbarticles/(int)$limit);
        $prevOffset = $offset == 0 ? 0 : $offset-$limit;
-       $nextOffset = $offset <= $nbarticles ? $offset+$limit : $offset;
-
-       
+       $nextOffset = $offset <= $nbarticles ? $offset+$limit : $offset;       
         return $this->twig->render('frontend/pageArticles.html.twig',
         ['nextoffset'=>$nextOffset, 'prevoffset'=>$prevOffset,'offset'=>$offset,'limit'=>$limit,'nbarticles'=>$nbarticles,'nbpages'=>(int)$nbPages,'pageart'=>$pageArt]);
        
@@ -75,6 +81,10 @@ class FrontendController
         $event = $this->eventDao->find($id);
         $article = $this->articleDao->find($id);
         $comments  = $this->commentDao->getComments($id);
+
+        if(!$article){
+            $this->er(); 
+        }
        
         return $this->twig->render('frontend/article.html.twig',['events'=>$events,  'event'=>$event, 'article'=>$article,'articles'=>$articles ,'comments'=>$comments]);
     }
@@ -83,7 +93,10 @@ class FrontendController
         $events = $this->eventDao->findEvents();
         $articles = $this->articleDao->findAll();
         $event = $this->eventDao->find($id);
-        
+        if(!$event){
+            $this->er(); 
+        }
+
         return $this->twig->render('frontend/event.html.twig',[ 'events'=>$events,  'event'=>$event,'articles'=>$articles]);
     }
     
@@ -132,7 +145,7 @@ class FrontendController
         }
         else{
              
-          // echo 'merci de votre message '; 
+          
              
         $headers  = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=utf8'."\r\n";
@@ -165,10 +178,6 @@ class FrontendController
       <body onLoad=\"javascript:alert('Message Envoyé!');window.location='/contact'\">
       </body>
           </html>";
-      
-       // header('Location: /contact');
-           
-
         }
         
     }
@@ -181,6 +190,7 @@ class FrontendController
                
         return $this->twig->render('frontend/connect.html.twig',[ 'events'=>$events,'articles'=>$articles]);
     }
+
 
  }
 }

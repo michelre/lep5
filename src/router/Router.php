@@ -34,6 +34,7 @@ class Router
                 return $this->frontendController->home();
             });
 
+
             $this->klein->respond('GET', '/les_articles', function ($request) {
                 return $this->frontendController->pageArticles($request->param('offset'),$request->param('limit'));
             });
@@ -140,8 +141,7 @@ class Router
 
 
                     $this->klein->respond('POST', '/addEvent', function($request){
-                        $this->protect($request);
-                       
+                        $this->protect($request);                    
                         return $this->backendController->addEvent( $request->paramsPost(),$request->files());
 
                         });

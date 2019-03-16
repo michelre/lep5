@@ -1,7 +1,7 @@
 {% block navbar %}
-<section class="navigation">
+<div class="navigation">  
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center fixed-top">
-      <a class="navbar-brand" href="#">Association Filature Pallud </a><i class="fas fa-feather-alt"></i>
+      <a class="navbar-brand" href="#">Association Filature Pallud </a><i><img class="logo" src="/public/images/logpall.jpg" alt="panneau avec le nom"></i>
        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
          <span class="navbar-toggler-icon"></span>
        </button>
@@ -20,11 +20,10 @@
                <a class="nav-link" href="/connect"><i class="fas fa-sign-in-alt"></i>Espace Admin</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/contact"><i class="far fa-envelope"></i></i>Contact</a>
+              <a class="nav-link" href="/contact"><i class="far fa-envelope"></i>Contact</a>
            </li>
-           
           </ul>
         </div>
     </nav>
- </section>
+  </div>
  {% endblock %}

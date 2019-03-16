@@ -191,8 +191,12 @@ class BackendController
                    
                 public function supprimEvent($id)
                {
+                  $event = $this->eventDao->find($id);
                   
                   $supprim = $this->eventDao->delete($id);
+                  $re = '/uploads\/(.*)$/m';
+                  preg_match($re, $event->getImage(), $matches);                    
+                  unlink("public/uploads/".$matches[1]);
                   header('location: /admin');
                   die();  
               

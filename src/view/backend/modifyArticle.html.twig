@@ -24,10 +24,11 @@
                 <div class="form-group">
                   <label for="image">Selectionnez une nouvelle image :</label> 
                     <input type="file" name="image">
+                    <div class="container text-center"><img class ="mini"src ="{{article.image}}"><figcaption>photo existante</figcaption></div>
                   </div>  
                   <div class="form-group">   
                     <label for="legend">légende:</label>
-                  <input type="text" class="form-control" id="legend" name="legend">                           
+                  <input type="text" class="form-control" id="legend" name="legend"value="{{article.legend}}">                           
                   </div>
                     <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>
