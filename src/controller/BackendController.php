@@ -88,8 +88,9 @@ class BackendController
             $articles = $this->articleDao->findAll();
             $article = $this->articleDao->find($id);
 
-               
-               if(!empty($files->get('image'))) {   
+               $imageNameDb = $article->getImage(); 
+            
+               if($files->get('image')['tmp_name']!='') {   
               $re = '/uploads\/(.*)$/m';
                preg_match($re, $article->getImage(), $matches);                                             
                   unlink("public/uploads/".$matches[1]);
@@ -104,9 +105,10 @@ class BackendController
                  
                   $imageName = uniqid().$extensions[$file['type']];             
                   move_uploaded_file($file["tmp_name"], $target_dir.$imageName);
+                  $imageNameDb = '/public/uploads/'.$imageName;
                }
                                    
-            $this->articleDao->update($id,$formData->get("title"),$formData->get("content"),'/public/uploads/'.$imageName, $formData->get("legend"));
+            $this->articleDao->update($id,$formData->get("title"),$formData->get("content"),$imageNameDb, $formData->get("legend"));
                        
             header('location: /admin');
             die();                 
@@ -166,7 +168,9 @@ class BackendController
                       $events = $this->eventDao->findEvents();
                       $event = $this->eventDao->find($id);
 
-                      if(!empty($files->get('image'))) {   
+                      $imageNameDb = $event->getImage(); 
+            
+                      if($files->get('image')['tmp_name']!='') {   
                         $re = '/uploads\/(.*)$/m';
                          preg_match($re, $event->getImage(), $matches);                                             
                             unlink("public/uploads/".$matches[1]);
@@ -181,9 +185,10 @@ class BackendController
                            
                             $imageName = uniqid().$extensions[$file['type']];             
                             move_uploaded_file($file["tmp_name"], $target_dir.$imageName);
+                            $imageNameDb = '/public/uploads/'.$imageName;
                          }
 
-                      $this->eventDao->update($id,$formData->get("title"),$formData->get("states"),'/public/uploads/'.$imageName, $formData->get("legend"));
+                      $this->eventDao->update($id,$formData->get("title"),$formData->get("states"),$imageNameDb, $formData->get("legend"));
                       header('location: /admin');
                       die();
                      

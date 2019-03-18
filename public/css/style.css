@@ -162,7 +162,7 @@ p{color:black;word-wrap: break-word; }
 .img-fluid{
   border: 5px double rgb(242, 238, 140); max-height: 700px; box-shadow: 20px 20px 10px rgb(122, 121, 68);
 }
-.jumbotron{min-width:500px;min-height:100px;   border: 1px solid rgb(216, 204, 94); background-color:rgb(255, 250, 175); box-shadow: 5px 5px 5px rgb(122, 121, 68) }
+.jumbotron{ border: 1px solid rgb(216, 204, 94); background-image:radial-gradient(white, rgb(255, 250, 175)); box-shadow: 5px 5px 5px rgb(122, 121, 68) }
 
 .video-container {
 	position: relative;

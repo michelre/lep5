@@ -1,7 +1,8 @@
 const form = document.querySelector('#authentication-form');
 const alert = document.querySelector('.alert-danger');
-alert.style.display = 'none';
-
+if(alert){
+  alert.style.display = 'none';
+}
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   alert.style.display = 'none';

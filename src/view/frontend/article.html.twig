@@ -50,18 +50,18 @@
         {% for comment in comments %}
         <div class="container" id="plus_comment">
           <div class="row">
-            <div class="col-lg-1  text-center border_grey">
+            <div class="col-lg-12  text-center border_grey">
               <em>{{comment.comment_date|date('d/m/Y')}}</em><br>
             </div>
           </div>
-          <div class="row">
-             <div class= "col-lg-10 jumbotron">
+          <div class="row"></div>
+             <div class="jumbotron">
              Auteur:   <strong>{{comment.author}}</strong><br>
              
               {{comment.comment}}  
-                                             
+            </div>                                 
             </div> 
-          </div>
+         
         </div> 
         {% endfor %}
 </section>
