@@ -1,8 +1,6 @@
-
 {% extends "frontend/base.html.twig" %}
 {% block title %}Modification des articles{% endblock %}
-{% block body %}
-  
+{% block body %}  
   {{ include('backend/backnavbar.html.twig') }} 
   <br>
   <br>
@@ -46,9 +44,8 @@
 <script src='/public/js/tinymce/tinymce.min.js'></script>
 <script>
 tinymce.init({
-  selector: '#mytextarea' 
-  
+  selector: '#mytextarea'  
 });
 </script>
 {% endblock %}
-  {% endblock %}
+{% endblock %}

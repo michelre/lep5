@@ -1,12 +1,9 @@
 <?php
 namespace App\Service;
-
 use Firebase\JWT\JWT;
-
 class AuthentificationService
 {
       private $key = "zarco_lep5";
-
       public function createToken($id)
       {
           $token = array(
@@ -24,7 +21,6 @@ class AuthentificationService
               return false;
           }
       }
-
       public function disconnect(){
           setcookie('p5_token');
       }

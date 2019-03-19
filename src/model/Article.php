@@ -1,9 +1,7 @@
 <?php
 namespace App\Model;
-
 class Article implements \JsonSerializable
 {
-
     private $id;
     private $title;
     private $content;
@@ -17,7 +15,6 @@ class Article implements \JsonSerializable
     {
         return $this->id;
     }
-
     /**
      * @param mixed $id
      * @return Article
@@ -27,7 +24,6 @@ class Article implements \JsonSerializable
         $this->id = $id;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -35,7 +31,6 @@ class Article implements \JsonSerializable
     {
         return $this->title;
     }
-
     /**
      * @param mixed $title
      * @return Article
@@ -45,7 +40,6 @@ class Article implements \JsonSerializable
         $this->title = $title;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -53,7 +47,6 @@ class Article implements \JsonSerializable
     {
         return $this->content;
     }
-
     /**
      * @param mixed $content
      * @return Article
@@ -63,7 +56,6 @@ class Article implements \JsonSerializable
         $this->content = $content;
         return $this;
     }
-
 /**
      * @return mixed
      */
@@ -71,7 +63,6 @@ class Article implements \JsonSerializable
     {
         return $this->image;
     }
-
     /**
      * @param mixed $image
      * @return Article
@@ -81,7 +72,6 @@ class Article implements \JsonSerializable
         $this->image = $image;
         return $this;
     }
-
 /**
      * @return mixed
      */
@@ -89,7 +79,6 @@ class Article implements \JsonSerializable
     {
         return $this->legend;
     }
-
     /**
      * @param mixed $legend
      * @return Article
@@ -99,7 +88,6 @@ class Article implements \JsonSerializable
         $this->legend = $legend;
         return $this;
     }
-
 /**
      * @return mixed
      */
@@ -107,7 +95,6 @@ class Article implements \JsonSerializable
     {
         return $this->creationDate;
     }
-
     /**
      * @param mixed $creationDate
      * @return Article
@@ -117,7 +104,6 @@ class Article implements \JsonSerializable
         $this->content = $creationDate;
         return $this;
     }
-
     /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php

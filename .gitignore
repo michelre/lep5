@@ -1,2 +1,4 @@
 vendor
 public/uploads
+.env
+public/scripts/access.php

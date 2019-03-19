@@ -1,15 +1,12 @@
 <?php
 namespace App\Model;
-
 class Email implements \JsonSerializable
-{
-   
+{  
     private $name;
     private $firstName;
     private $email;
     private $phone;
     private $message;
-
     /**
      * @return mixed
      */
@@ -17,7 +14,6 @@ class Email implements \JsonSerializable
     {
         return $this->name;
     }
-
     /**
      * @param mixed $name
      * @return email
@@ -27,7 +23,6 @@ class Email implements \JsonSerializable
         $this->name = $name;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -35,7 +30,6 @@ class Email implements \JsonSerializable
     {
         return $this->firstname;
     }
-
     /**
      * @param mixed $firstName
      * @return email
@@ -45,7 +39,6 @@ class Email implements \JsonSerializable
         $this->firstName = $firstName;
         return $this;
     }
-
    /**
      * @return mixed
      */
@@ -53,7 +46,6 @@ class Email implements \JsonSerializable
     {
         return $this->email;
     }
-
     /**
      * @param mixed $email
      * @return email
@@ -63,7 +55,6 @@ class Email implements \JsonSerializable
         $this->email = $email;
         return $this;
     }
-
 /**
      * @return mixed
      */
@@ -71,7 +62,6 @@ class Email implements \JsonSerializable
     {
         return $this->phone;
     }
-
     /**
      * @param mixed $phone
      * @return email
@@ -81,7 +71,6 @@ class Email implements \JsonSerializable
         $this->phone = $phone;
         return $this;
     }
-
 /**
      * @return mixed
      */
@@ -89,7 +78,6 @@ class Email implements \JsonSerializable
     {
         return $this->message;
     }
-
     /**
      * @param mixed $message
      * @return email
@@ -99,7 +87,6 @@ class Email implements \JsonSerializable
         $this->message = $message;
         return $this;
     }
-
     /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
@@ -109,14 +96,12 @@ class Email implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        return [
-            
+        return [           
             'name' => $this->name,
             'firstname' => $this->firstName,
             'email'=>$this->$email,
             'phone'=>$this->$phone,
-            'message'=>$this->$message
-              
+            'message'=>$this->$message             
               ];
     }
 }

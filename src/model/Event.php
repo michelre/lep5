@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Model;
-
 class Event implements \JsonSerializable
 {
-
     private $id;
     private $title;
     private $states;
@@ -18,7 +15,6 @@ class Event implements \JsonSerializable
     {
         return $this->id;
     }
-
     /**
      * @param mixed $id
      * @return Event
@@ -28,7 +24,6 @@ class Event implements \JsonSerializable
         $this->id = $id;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -36,7 +31,6 @@ class Event implements \JsonSerializable
     {
         return $this->title;
     }
-
     /**
      * @param mixed $title
      * @return Event
@@ -46,7 +40,6 @@ class Event implements \JsonSerializable
         $this->title = $title;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -54,7 +47,6 @@ class Event implements \JsonSerializable
     {
         return $this->states;
     }
-
     /**
      * @param mixed $states
      * @return Event
@@ -64,7 +56,6 @@ class Event implements \JsonSerializable
         $this->states = $states;
         return $this;
     }
-
 /**
      * @return mixed
      */
@@ -72,7 +63,6 @@ class Event implements \JsonSerializable
     {
         return $this->image;
     }
-
     /**
      * @param mixed $image
      * @return Event
@@ -82,7 +72,6 @@ class Event implements \JsonSerializable
         $this->image = $image;
         return $this;
     }
-
 /**
      * @return mixed
      */
@@ -90,8 +79,7 @@ class Event implements \JsonSerializable
     {
         return $this->legend;
     }
-
-    /**
+   /**
      * @param mixed $legend
      * @return Event
      */
@@ -100,7 +88,6 @@ class Event implements \JsonSerializable
         $this->legend = $legend;
         return $this;
     }
-
 /**
      * @return mixed
      */
@@ -108,7 +95,6 @@ class Event implements \JsonSerializable
     {
         return $this->eventDate;
     }
-
     /**
      * @param mixed $eventDate
      * @return Event
@@ -118,9 +104,6 @@ class Event implements \JsonSerializable
         $this->content = $eventDate;
         return $this;
     }
-
-
-
     /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php

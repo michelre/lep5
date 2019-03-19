@@ -1,20 +1,16 @@
 <?php
 namespace  App\Dao;
-
 use App\Model\Article;
 use App\Dao\BaseDao;
 use App\Dao\CommentDao;
 use PDO;
-
 class CommentDao extends BaseDao
  {
     public function insert($articleId, $author, $comment)
     {
-     $result = $this->db->prepare('INSERT INTO comments( article_id, author, comment, comment_date) VALUES(:article_id, :author, :comment, NOW())');    
-              
-        $result->execute(['article_id'=>$articleId,'author' => $author,'comment'=> $comment ]);
+     $result = $this->db->prepare('INSERT INTO comments( article_id, author, comment, comment_date) VALUES(:article_id, :author, :comment, NOW())');                
+     $result->execute(['article_id'=>$articleId,'author' => $author,'comment'=> $comment ]);
     }
-
     public function getComments($articleId)
     {
         $query = $this->db->prepare('SELECT * FROM comments WHERE article_id=? ORDER BY comment_date DESC');
@@ -34,5 +30,4 @@ class CommentDao extends BaseDao
         $query->execute([$id]);
         return ;
     }
-
 }

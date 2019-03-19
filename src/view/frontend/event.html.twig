@@ -1,9 +1,7 @@
-
 {% extends "frontend/base.html.twig" %}
 {% block title %}Evenement{% endblock %}
 {% block body %}
 {{ include('frontend/navbar.html.twig') }} 
-
 <br>
 <div class="container text-center "  id ="evenement"> 
         <em >le: {{event.event_date|date('d/m/Y')}}</em>
@@ -26,5 +24,4 @@
      </div>
 </div>
 <br>
-
 {% endblock %}
