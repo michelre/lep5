@@ -1,67 +1,67 @@
 {% extends "frontend/base.html.twig" %}
 {% block title %}Article{% endblock %}
 {% block body %}
-{{ include('frontend/navbar.html.twig') }} 
-<br><br><br>
-<div class="container text-center "  id ="art">        
-      <em >le: {{article.creation_date|date('d/m/Y')}}</em>
-    <div class="row" id = "titre_article">
-        <h2 class="text-center mb-10"id="titre" >{{article.title}}</h2>
+  {{ include('frontend/navbar.html.twig') }}
+  <br><br><br>
+  <div class="container text-center " id="art">
+    <em>le: {{ article.creation_date|date('d/m/Y') }}</em>
+    <div class="row" id="titre_article">
+      <h2 class="text-center mb-10" id="titre">{{ article.title }}</h2>
     </div>
     <br>
-    <div class="row">     
-      <div class="col-lg-12 " id = "cont"><p>{{article.content|raw}}</p></div>       
-    </div>   
-<br>
-<div class ="container justify-content-center ">
-   <div class ="row" id="">
-      <div class="col-lg-12 text-center ">
-       <img class ="img-fluid"src ="{{article.image}}">
-       <br>
-      <figcaption>{{article.legend}}</figcaption>
-    </div>
-   </div>
-</div>
-</div>
-<br>
-<section class ="container">
     <div class="row">
-      <div class ="col-lg-12 text-center "><h3>Laissez votre commentaire</h3></div>
-        <div class="container">
-           <p>vous pouvez taper votre nom et écrire un commentaire au sujet de cet article.</p>         
-           <form action="/addComment/{{article.id}}" method="post" novalidate>
-                    <div class="form-group">
-                     <label for="author">Auteur:</label>
-                        <input type="text" class="form-control" id="author" name="author" required>
-                        <span id="missAuthor"></span><br>
-                    </div>
-                    <div class="form-group">
-                     <label for="commentaire">Commentaire:</label>
-                       <textarea id="commentaire" class="form-control"  name="comment" required></textarea>
-                       <span id="missCommentaire"></span><br>
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="envoi1">Envoyer</button>
-                </form>
+      <div class="col-lg-12 " id="cont"><p>{{ article.content|raw }}</p></div>
+    </div>
+    <br>
+    <div class="container justify-content-center ">
+      <div class="row" id="">
+        <div class="col-lg-12 text-center ">
+          <img class="img-fluid" src="{{ article.image }}">
+          <br>
+          <figcaption>{{ article.legend }}</figcaption>
         </div>
-    </div>    
-</section>
-<br>
-<section>
-        {% for comment in comments %}
-        <div class="container" id="plus_comment">
-          <div class="row">
-            <div class="col-lg-12  text-center border_grey">
-              <em>{{comment.comment_date|date('d/m/Y')}}</em><br>
-            </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <section class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center "><h3>Laissez votre commentaire</h3></div>
+      <div class="container">
+        <p>vous pouvez taper votre nom et écrire un commentaire au sujet de cet article.</p>
+        <form action="/addComment/{{ article.id }}" method="post" novalidate>
+          <div class="form-group">
+            <label for="author">Auteur:</label>
+            <input type="text" class="form-control" id="author" name="author" required>
+            <span id="missAuthor"></span><br>
           </div>
-          <div class="row"></div>
-             <div class="jumbotron">
-             Auteur:   <strong>{{comment.author}}</strong><br>            
-              {{comment.comment}}  
-            </div>                                 
-            </div>         
-        </div> 
-        {% endfor %}
-</section>
-<script src ='/public/js/envoi1.js'></script>
+          <div class="form-group">
+            <label for="commentaire">Commentaire:</label>
+            <textarea id="commentaire" class="form-control" name="comment" required></textarea>
+            <span id="missCommentaire"></span><br>
+          </div>
+          <button type="submit" class="btn btn-primary" id="envoi1">Envoyer</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <br>
+  <section>
+    {% for comment in comments %}
+      <div class="container" id="plus_comment">
+        <div class="row">
+          <div class="col-lg-12  text-center border_grey">
+            <em>{{ comment.comment_date|date('d/m/Y') }}</em><br>
+          </div>
+        </div>
+        <div class="row"></div>
+        <div class="jumbotron">
+          Auteur: <strong>{{ comment.author }}</strong><br>
+          {{ comment.comment }}
+        </div>
+      </div>
+      </div>
+    {% endfor %}
+  </section>
+  <script src='/public/js/envoi1.js'></script>
 {% endblock %}

@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Model;
+
 class Event implements \JsonSerializable
 {
     private $id;
@@ -8,6 +10,7 @@ class Event implements \JsonSerializable
     private $eimage;
     private $legend;
     private $eventDate;
+
     /**
      * @return mixed
      */
@@ -15,6 +18,7 @@ class Event implements \JsonSerializable
     {
         return $this->id;
     }
+
     /**
      * @param mixed $id
      * @return Event
@@ -24,6 +28,7 @@ class Event implements \JsonSerializable
         $this->id = $id;
         return $this;
     }
+
     /**
      * @return mixed
      */
@@ -31,6 +36,7 @@ class Event implements \JsonSerializable
     {
         return $this->title;
     }
+
     /**
      * @param mixed $title
      * @return Event
@@ -40,6 +46,7 @@ class Event implements \JsonSerializable
         $this->title = $title;
         return $this;
     }
+
     /**
      * @return mixed
      */
@@ -47,6 +54,7 @@ class Event implements \JsonSerializable
     {
         return $this->states;
     }
+
     /**
      * @param mixed $states
      * @return Event
@@ -56,13 +64,15 @@ class Event implements \JsonSerializable
         $this->states = $states;
         return $this;
     }
-/**
+
+    /**
      * @return mixed
      */
     public function getImage()
     {
         return $this->image;
     }
+
     /**
      * @param mixed $image
      * @return Event
@@ -72,14 +82,16 @@ class Event implements \JsonSerializable
         $this->image = $image;
         return $this;
     }
-/**
+
+    /**
      * @return mixed
      */
     public function getLegend()
     {
         return $this->legend;
     }
-   /**
+
+    /**
      * @param mixed $legend
      * @return Event
      */
@@ -88,13 +100,15 @@ class Event implements \JsonSerializable
         $this->legend = $legend;
         return $this;
     }
-/**
+
+    /**
      * @return mixed
      */
     public function getEventtDate()
     {
         return $this->eventDate;
     }
+
     /**
      * @param mixed $eventDate
      * @return Event
@@ -104,6 +118,7 @@ class Event implements \JsonSerializable
         $this->content = $eventDate;
         return $this;
     }
+
     /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
@@ -118,8 +133,8 @@ class Event implements \JsonSerializable
             'title' => $this->title,
             'states' => $this->states,
             'image' => $this->image,
-            'legend'=> $this->legend,
-            'event_date'=> $this->setEventDate  
-              ];
+            'legend' => $this->legend,
+            'event_date' => $this->setEventDate
+        ];
     }
 }

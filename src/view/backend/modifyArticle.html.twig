@@ -1,51 +1,53 @@
 {% extends "frontend/base.html.twig" %}
 {% block title %}Modification des articles{% endblock %}
-{% block body %}  
-  {{ include('backend/backnavbar.html.twig') }} 
+{% block body %}
+  {{ include('backend/backnavbar.html.twig') }}
   <br>
   <br>
-<section class="tab2">
-    <div class="container text-center">        
-        <h2>Modifier l'article </h2>                              
+  <section class="tab2">
+    <div class="container text-center">
+      <h2>Modifier l'article </h2>
     </div>
     <section>
-          <div class = container  id="post">          
-            <form action="/changeArticle/{{article.id}}" method="post" enctype="multipart/form-data">
-              <div class="form-group">
-              <label for="title">Titre:</label>
-              <input type="text" class="form-control" id="title" name="title" value ="{{article.title}}">
-              </div>
-                <div class="form-group">
-                    <label for="content">Contenu:</label>
-                    <textarea  class="form-control" id="mytextarea" name="content">{{article.content}}</textarea>
-                </div>
-                <div class="form-group">
-                  <label for="image">Selectionnez une nouvelle image :</label> 
-                    <input type="file" name="image">
-                    <div class="container text-center"><img class ="mini"src ="{{article.image}}"><figcaption>photo existante</figcaption></div>
-                  </div>  
-                  <div class="form-group">   
-                    <label for="legend">légende:</label>
-                  <input type="text" class="form-control" id="legend" name="legend"value="{{article.legend}}">                           
-                  </div>
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
-            </form>
+      <div class=container id="post">
+        <form action="/changeArticle/{{ article.id }}" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="title">Titre:</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ article.title }}">
           </div>
-        <div class="container text-center">        
-           <h2>Supprimer l'article </h2>                               
-             <form action="/supprimArticle/{{article.id}}" method="post" >
-              <button type="submit" class="btn btn-danger">Supprimer</button>
-             </form>
-        </div>
-        <br>
+          <div class="form-group">
+            <label for="content">Contenu:</label>
+            <textarea class="form-control" id="mytextarea" name="content">{{ article.content }}</textarea>
+          </div>
+          <div class="form-group">
+            <label for="image">Selectionnez une nouvelle image :</label>
+            <input type="file" name="image">
+            <div class="container text-center"><img class="mini" src="{{ article.image }}">
+              <figcaption>photo existante</figcaption>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="legend">légende:</label>
+            <input type="text" class="form-control" id="legend" name="legend" value="{{ article.legend }}">
+          </div>
+          <button type="submit" class="btn btn-primary">Envoyer</button>
+        </form>
+      </div>
+      <div class="container text-center">
+        <h2>Supprimer l'article </h2>
+        <form action="/supprimArticle/{{ article.id }}" method="post">
+          <button type="submit" class="btn btn-danger">Supprimer</button>
+        </form>
+      </div>
+      <br>
     </section>
-</section> 
-{% block javascripts %}
-<script src='/public/js/tinymce/tinymce.min.js'></script>
-<script>
-tinymce.init({
-  selector: '#mytextarea'  
-});
-</script>
-{% endblock %}
+  </section>
+  {% block javascripts %}
+    <script src='/public/js/tinymce/tinymce.min.js'></script>
+    <script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
+  {% endblock %}
 {% endblock %}

@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Model;
+
 class Comment implements \JsonSerializable
 {
     private $id;
@@ -7,6 +9,7 @@ class Comment implements \JsonSerializable
     private $author;
     private $comment;
     private $commentDate;
+
     /**
      * @return mixed
      */
@@ -14,6 +17,7 @@ class Comment implements \JsonSerializable
     {
         return $this->id;
     }
+
     /**
      * @param mixed $id
      * @return Comment
@@ -23,13 +27,15 @@ class Comment implements \JsonSerializable
         $this->id = $id;
         return $this;
     }
-/**
+
+    /**
      * @return mixed
      */
     public function getArticleId()
     {
         return $this->article_id;
     }
+
     /**
      * @param mixed $article_id
      * @return Comment
@@ -39,6 +45,7 @@ class Comment implements \JsonSerializable
         $this->article_id = $articleId;
         return $this;
     }
+
     /**
      * @return mixed
      */
@@ -46,6 +53,7 @@ class Comment implements \JsonSerializable
     {
         return $this->author;
     }
+
     /**
      * @param mixed $author
      * @return Comment
@@ -55,6 +63,7 @@ class Comment implements \JsonSerializable
         $this->author = $author;
         return $this;
     }
+
     /**
      * @return mixed
      */
@@ -62,6 +71,7 @@ class Comment implements \JsonSerializable
     {
         return $this->comment;
     }
+
     /**
      * @param mixed $comment
      * @return Comment
@@ -71,13 +81,15 @@ class Comment implements \JsonSerializable
         $this->comment = $comment;
         return $this;
     }
-/**
+
+    /**
      * @return mixed
      */
     public function getCommentDate()
     {
         return $this->commentDate;
     }
+
     /**
      * @param mixed $commentDate
      * @return Comment
@@ -87,6 +99,7 @@ class Comment implements \JsonSerializable
         $this->content = $commentDate;
         return $this;
     }
+
     /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
@@ -98,10 +111,10 @@ class Comment implements \JsonSerializable
     {
         return [
             'id' => $this->id,
-            'article_id' =>$this->article_id,
+            'article_id' => $this->article_id,
             'author' => $this->author,
             'comment' => $this->comment,
-            'commentDate'=> $this->commentDate
+            'commentDate' => $this->commentDate
         ];
     }
 }

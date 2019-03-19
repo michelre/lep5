@@ -1,10 +1,13 @@
 <?php
+
 namespace App\Model;
+
 class User implements \JsonSerializable
 {
     private $id;
     private $name;
     private $pass;
+
     /**
      * @return mixed
      */
@@ -12,6 +15,7 @@ class User implements \JsonSerializable
     {
         return $this->id;
     }
+
     /**
      * @param mixed $id
      * @return User
@@ -21,6 +25,7 @@ class User implements \JsonSerializable
         $this->id = $id;
         return $this;
     }
+
     /**
      * @return mixed
      */
@@ -28,6 +33,7 @@ class User implements \JsonSerializable
     {
         return $this->name;
     }
+
     /**
      * @param mixed $name
      * @return User
@@ -37,6 +43,7 @@ class User implements \JsonSerializable
         $this->name = $name;
         return $this;
     }
+
     /**
      * @return mixed
      */
@@ -44,6 +51,7 @@ class User implements \JsonSerializable
     {
         return $this->pass;
     }
+
     /**
      * @param mixed $pass
      * @return User
@@ -53,6 +61,7 @@ class User implements \JsonSerializable
         $this->pass = $pass;
         return $this;
     }
+
     /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
@@ -65,7 +74,7 @@ class User implements \JsonSerializable
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'pass' => $this->pass             
-              ];
+            'pass' => $this->pass
+        ];
     }
 }

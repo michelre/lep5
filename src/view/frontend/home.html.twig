@@ -1,7 +1,7 @@
 {% extends "frontend/base.html.twig" %}
 {% block title %}Home{% endblock %}
-{% block body %} 
-  {{ include('frontend/navbar.html.twig') }}  
+{% block body %}
+  {{ include('frontend/navbar.html.twig') }}
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -31,62 +31,65 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-  </div> 
-  <br>    
-<section class="container">
-  <br>
-  {% block content %}
-  <div class="row">
-      <div class="col-lg-12 text-center">
-          {% block sidebar %}
-              <h1 id="bienvenue">Bienvenue sur le site de notre association.</h1>
-              <h4> vous trouverez sur cette page  les liens vers le dernier article en date et aussi le lien vers le dernier évènement courant concernant l'association. </h4><br>
-              <h3> La video concernant la filature !</h3>
-  <div class =" video-container " >       
-    <iframe width="1019" height="573" src="https://www.youtube.com/embed/YqGKKE_FVVE" style="border:0;" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>                   
-          {% endblock %}
-      </div>
   </div>
-{% endblock content %}
-   <br>
-   <div class ="row">
-      <div class="col-lg-6 " id ="tableau_articles">
-        <table class = "table table-bordered table-hover table-stiped">      
+  <br>
+  <section class="container">
+    <br>
+    {% block content %}
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          {% block sidebar %}
+            <h1 id="bienvenue">Bienvenue sur le site de notre association.</h1>
+            <h4> vous trouverez sur cette page les liens vers le dernier article en date et aussi le lien vers le
+              dernier évènement courant concernant l'association. </h4><br>
+            <h3> La video concernant la filature !</h3>
+            <div class=" video-container ">
+              <iframe width="1019" height="573" src="https://www.youtube.com/embed/YqGKKE_FVVE" style="border:0;"
+                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen></iframe>
+            </div>
+          {% endblock %}
+        </div>
+      </div>
+    {% endblock content %}
+    <br>
+    <div class="row">
+      <div class="col-lg-6 " id="tableau_articles">
+        <table class="table table-bordered table-hover table-stiped">
           <thead>
-           <tr class ="text-center">         
-            <th class="col-xs-2  col-sm-2 col-lg-4">Le dernier article</th>          
+          <tr class="text-center">
+            <th class="col-xs-2  col-sm-2 col-lg-4">Le dernier article</th>
             <th class=" col-xs-2 col-sm-2 col-lg-4">datant du :</th>
-           </tr>
+          </tr>
           </thead>
           <tbody>
-              {% for article in lastArticle %}            
-              <tr class="text-center">
-                  <td><a href="/article/{{article.id}}">{{article.title}}</a></td>
-                  <td> Datant du :{{article.creation_date|date('d/m/Y')}}</td>
-                </tr>   
-             {% endfor %}         
-         </tbody>
-        </table>      
-       </div>
-       <div class="col-lg-6 " id ="tableau_events">
-        <table class = "table table-bordered table-hover table-stiped">      
-          <thead>
-           <tr class ="text-center">         
-            <th class="col-xs-2  col-sm-2 col-lg-4">L'évènement actuel</th>
-            <th class=" col-xs-2 col-sm-2 col-lg-4"> Date:</th>        
-           </tr>
-          </thead>
-          <tbody>
-              {% for event in lastEvent %}              
-              <tr class="text-center">
-                  <td><a href="/event/{{event.id}}">{{ event.title}}</a></td> 
-                  <td> Posté le:{{event.event_date|date('d/m/Y')}}</td>
-                </tr>   
-             {% endfor %}         
-         </tbody>
+          {% for article in lastArticle %}
+            <tr class="text-center">
+              <td><a href="/article/{{ article.id }}">{{ article.title }}</a></td>
+              <td> Datant du :{{ article.creation_date|date('d/m/Y') }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
         </table>
-       </div>
-   </div>
- </section>
+      </div>
+      <div class="col-lg-6 " id="tableau_events">
+        <table class="table table-bordered table-hover table-stiped">
+          <thead>
+          <tr class="text-center">
+            <th class="col-xs-2  col-sm-2 col-lg-4">L'évènement actuel</th>
+            <th class=" col-xs-2 col-sm-2 col-lg-4"> Date:</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for event in lastEvent %}
+            <tr class="text-center">
+              <td><a href="/event/{{ event.id }}">{{ event.title }}</a></td>
+              <td> Posté le:{{ event.event_date|date('d/m/Y') }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 {% endblock %}
